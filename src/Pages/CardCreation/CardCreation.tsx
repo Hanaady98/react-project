@@ -2,14 +2,14 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import { useForm } from "react-hook-form";
 import { CardCreationSchema } from "../../Validations/CardCreationSchema";
 import { FloatingLabel, Button } from "flowbite-react";
-import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { initialCardData } from "./initialCardData";
+import Swal from "sweetalert2";
 
 const CardCreation = () => {
 
-    //initialCardData is in a different file
+    //initialCardData is in a initialCardData file
 
     const nav = useNavigate();
 
@@ -27,11 +27,27 @@ const CardCreation = () => {
         try {
             axios.defaults.headers.common['x-auth-token'] = localStorage.getItem("token");
             await axios.post("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards", form);
-            toast.success("a new business card has been created");
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Your Card Has Been Created",
+                showConfirmButton: false,
+                timer: 1500,
+                background: '#6d6d6d',
+                color: '#ffffff',
+                iconColor: '#E18E96',
+                timerProgressBar: true,
+            });
             nav("/mycards");
         } catch (error) {
-            toast.error("business card creation failed");
-            console.log(error);
+            Swal.fire({
+                title: "failed!",
+                icon: "error",
+                timerProgressBar: true,
+                timer: 2000,
+                toast: true,
+                showCloseButton: true
+            });
         };
     };
 
@@ -229,7 +245,6 @@ const CardCreation = () => {
                 </div>
 
                 <Button type="submit" disabled={!isValid} className="m-auto w-[20%] bg-pink-400">Create Card</Button>
-                <ToastContainer />
             </form>
         </>
     )

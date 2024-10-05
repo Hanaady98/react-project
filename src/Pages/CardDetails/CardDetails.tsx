@@ -3,8 +3,8 @@ import { TCard } from "../../Types/TCard";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Card } from "flowbite-react";
-import { toast } from "react-toastify";
-import TitleSection from "../../components/TitleSection/TitleSection";
+import TitleSection from "../../components/Shared/TitleSection/TitleSection";
+import Swal from "sweetalert2";
 
 const CardDetails = () => {
     const [card, setcard] = useState<TCard>();
@@ -15,7 +15,14 @@ const CardDetails = () => {
             const res = await axios.get("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/" + id)
             setcard(res.data);
         } catch (error) {
-            toast.error("fail");
+            Swal.fire({
+                title: "failed!",
+                icon: "error",
+                timerProgressBar: true,
+                timer: 2000,
+                toast: true,
+                showCloseButton: true
+            });
         };
     };
 

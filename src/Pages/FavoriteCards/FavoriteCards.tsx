@@ -1,71 +1,18 @@
-import { useEffect, useState } from "react"; //React hooks for managing state and side effects.
+import { useEffect } from "react"; //React hooks for managing state and side effects.
 import { TCard } from "../../Types/TCard";
-import { useNavigate } from "react-router-dom";  //Hook for navigating between routes.
-import { useSelector } from "react-redux"; //Allows us to get data from the Redux store.
-import { TRootState } from "../../Store/BigPie"; // Type for the root state of our Redux store.
-import axios from "axios"; // Library for making HTTP requests.
 import { Card } from "flowbite-react";
 import { FaPhoneAlt, FaHeart } from "react-icons/fa";
-import TitleSection from "../../components/TitleSection/TitleSection";
-import { toast, ToastContainer } from "react-toastify";
-
+import TitleSection from "../../components/Shared/TitleSection/TitleSection";
+import UseCards from "../../Hooks/UseCards";
 
 const FavoriteCards = () => {
-    const [cards, setcards] = useState<TCard[]>([]);
-    const nav = useNavigate();
 
-    /* Gets the current search word from the Redux store. */
-    const searchWord = useSelector((state: TRootState) => state.SearchSlice.search);
-
-    /* Filters the cards to include only those that match the search word. */
-    const searchCards = () => {
-        return cards.filter((item) => item.likes.includes(user.user!._id))
-            .filter((item: TCard) => item.title.includes(searchWord));
-    };
-
-    /* Checks if the current user has liked a specific card, first we check if there’s a logged in user,
-    if yes we Look at the list of likes for the given card. after that we See if the logged-in user’s ID
-    is in that list, Return true if the ID is found! otherwise, return false.*/
-    const isCardLiked = (card: TCard) => {
-        if (user && user.user) {
-            return card.likes.includes(user.user._id);
-        } else return false;
-    };
-
-    const navigateToCardDetails = (id: string) => {
-        nav("/card/" + id);
-    };
-
-    /* Fetches card data from a server and updates the state. */
-    const getCardsData = async () => {
-        const res = await axios.get("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards");
-        setcards(res.data);
-    };
-
-    /* This function either likes or unlikes a card, depending on the current state. */
-    const likeOrUnlikedCard = async (card: TCard) => {
-        const res = await axios.patch("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/" + card._id);
-        if (res.status === 200) {
-            const index = cards.indexOf(card);
-            const isCardLikedByUser = cards[index].likes.includes(user.user!._id);
-            const newCards = [...cards];
-            if (isCardLikedByUser) {
-                newCards[index].likes.splice(index);
-                toast.success("card unliked");
-            } else {
-                newCards[index].likes.push(user.user!._id);
-                toast.success("card liked");
-            };
-            setcards(newCards);
-        };
-    };
+    const { searchFavoriteCards, getCardsData, navigateToCardDetails, isCardLiked, likeOrUnlikedCard, user } = UseCards();
 
     /* Calls getCardsData when the component mounts (for instance when it first loads). */
     useEffect(() => {
         getCardsData();
-    }, [])
-
-    const user = useSelector((state: TRootState) => state.UserSlice);
+    }, []);
 
     return (
         <>
@@ -74,7 +21,7 @@ const FavoriteCards = () => {
             <main className="flex items-center justify-center min-h-screen gap-3 bg-gradient-to-r from-pink-100 to-pink-200 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800 ">
 
                 <div className="flex flex-wrap items-center justify-center gap-10 p-5 m-auto bg-grey-800 max-md:flex-col max-md:gap-10 md:w-4/5">
-                    {searchCards()!.map((item: TCard) => {
+                    {searchFavoriteCards()!.map((item: TCard) => {
                         return (
                             <Card key={item._id}
                                 className="dark:bg-pink-400 
@@ -132,7 +79,6 @@ const FavoriteCards = () => {
                     })}
                 </div>
             </main>
-            <ToastContainer />
         </>
     )
 };

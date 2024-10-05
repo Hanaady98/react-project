@@ -3,13 +3,13 @@ import { FloatingLabel, Button } from "flowbite-react";
 import { useForm } from "react-hook-form";
 import LoginSchema from "../../Validations/LoginSchema";
 import axios from "axios";
-import Flex from "../Flex/Flex";
+import Flex from "../Shared/Flex/Flex";
 import { FlexAligns } from "../../enums/FlexAligns";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../Store/UserSlice";
 import { useNavigate } from "react-router-dom";
 import { decode } from "../../Services/TokenService";
-import { toast, ToastContainer } from "react-toastify";
+import Swal from "sweetalert2";
 
 
 const Login = () => {
@@ -47,16 +47,28 @@ const Login = () => {
 
             /* then we get the user data using the id from the decoded token  */
             const user = await axios.get("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/" + id);
-
-            toast.success('User successfully logged in');
             /* we dispatch the user data to the redux store (dispatch helps us get to the actions/reducers) */
             dispatch(userActions.login(user.data));
-
+            Swal.fire({
+                title: "You Logged in!",
+                icon: "success",
+                timerProgressBar: true,
+                timer: 2000,
+                background: '#6d6d6d',
+                color: '#ffffff',
+                showConfirmButton: false,
+                showCloseButton: true,
+            });
             nav("/");
-
         } catch (error) {
-            console.log(error);
-            toast.error('User failed to login');
+            Swal.fire({
+                title: "failed!",
+                icon: "error",
+                timerProgressBar: true,
+                timer: 2000,
+                toast: true,
+                showCloseButton: true
+            });
         };
     };
 
@@ -90,9 +102,6 @@ const Login = () => {
                 <Button type="submit" disabled={!isValid} className="bg-pink-400 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800 dark:border-black">Log in</Button>
 
             </form>
-
-
-            <ToastContainer />
         </Flex>
     )
 };

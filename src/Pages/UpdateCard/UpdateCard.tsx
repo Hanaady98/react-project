@@ -12,10 +12,10 @@ import { TCard } from "../../Types/TCard";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { FloatingLabel, Button } from "flowbite-react";
-import { toast, ToastContainer } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { CardCreationSchema } from "../../Validations/CardCreationSchema";
+import Swal from "sweetalert2";
 
 const UpdateCardDetails = () => {
 
@@ -30,7 +30,14 @@ const UpdateCardDetails = () => {
             const res = await axios.get("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/" + id);
             setCard(res.data);
         } catch (error) {
-            toast.error("fail");
+            Swal.fire({
+                title: "failed!",
+                icon: "error",
+                timerProgressBar: true,
+                timer: 2000,
+                toast: true,
+                showCloseButton: true
+            });
         };
     };
 
@@ -51,8 +58,8 @@ const UpdateCardDetails = () => {
             country: card?.address.country,
             city: card?.address.city,
             street: card?.address.street,
-            houseNumber: 0,
-            zip: 0,
+            houseNumber: card?.address.houseNumber,
+            zip: card?.address.zip,
         },
     };
 
@@ -65,15 +72,29 @@ const UpdateCardDetails = () => {
 
     const onSubmit = async (form: typeof initialCardData) => {
         try {
-            console.log(form);
             axios.defaults.headers.common['x-auth-token'] = localStorage.getItem("token");
-            const res = await axios.put("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/" + id, form);
-            toast.success("changes updated successfully");
+            await axios.put("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/" + id, form);
+            Swal.fire({
+                title: "Done!",
+                text: "You Updated your card details successfully",
+                icon: "success",
+                timerProgressBar: true,
+                background: '#6d6d6d',
+                color: '#ffffff',
+                showConfirmButton: false,
+                timer: 2000,
+                showCloseButton: true
+            });
             nav("/mycards");
-            console.log(res);
         } catch (error) {
-            toast.error("changes updated failed");
-        }
+            Swal.fire({
+                title: "failed!",
+                icon: "error",
+                timerProgressBar: true,
+                timer: 2000,
+                showCloseButton: true
+            });
+        };
     };
 
     useEffect(() => {
@@ -254,7 +275,6 @@ const UpdateCardDetails = () => {
 
                 <Button type="submit" disabled={!isValid} className="m-auto w-[20%] bg-pink-400  dark:border-black
                                 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800">Update Changes</Button>
-                <ToastContainer />
             </form>
         </>
     )

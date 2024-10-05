@@ -5,7 +5,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { TRootState } from "../../../Store/BigPie";
 import { userActions } from "../../../Store/UserSlice";
 import { searchActions } from "../../../Store/SearchSlice";
-import { toast } from "react-toastify";
+import Swal from "sweetalert2";
+import { useEffect } from "react";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const Header = () => {
     const isLoggedIn = useSelector((state: TRootState) => state.UserSlice.user);
@@ -13,9 +16,31 @@ const Header = () => {
     const nav = useNavigate();
 
     const logout = () => {
-        dispatch(userActions.logout());
-        nav("/");
-        toast.success("You Logged Out Successfully");
+        Swal.fire({
+            title: "Are you sure?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            background: '#6d6d6d',
+            color: '#ffffff',
+            confirmButtonText: "Yes, log out!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(userActions.logout());
+                Swal.fire({
+                    title: "You Logged Out!",
+                    icon: "success",
+                    timerProgressBar: true,
+                    timer: 2000,
+                    background: '#6d6d6d',
+                    color: '#ffffff',
+                    showConfirmButton: false,
+                    showCloseButton: true
+                });
+            }
+            nav("/");
+        });
     };
 
     const search = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,6 +50,19 @@ const Header = () => {
 
     const location = useLocation().pathname;
     console.log(location);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            (async () => {
+                axios.defaults.headers.common['x-auth-token'] =
+                    token;
+                const user = await axios.get("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/" +
+                    (jwtDecode(token) as { _id: string })._id);
+                dispatch(userActions.login(user.data));
+            })();
+        }
+    }, []);
 
     return (
         <>

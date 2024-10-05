@@ -3,9 +3,8 @@ import { useForm } from "react-hook-form";
 import RegisterSchema from "../../Validations/RegisterSchema";
 import { FloatingLabel, Button, Checkbox, Label } from "flowbite-react";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
-import 'React-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Register = () => {
 
@@ -41,16 +40,32 @@ const Register = () => {
         mode: "onChange",
         resolver: joiResolver(RegisterSchema)
     });
-    //
+
     const onSubmit = async (form: typeof initialFormData) => {
         try {
-            const res = await axios.post('https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users', form);
-            console.log(res.data);
-            toast.success('User successfully registered');
+            await axios.post('https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users', form);
+            Swal.fire({
+                title: "Register Successful!",
+                icon: "success",
+                timerProgressBar: true,
+                timer: 2000,
+                background: '#6d6d6d',
+                color: '#ffffff',
+                showConfirmButton: false,
+                showCloseButton: true
+            });
             nav('/login');
         } catch (error) {
-            console.log(error);
-            toast.error('User failed to register');
+            Swal.fire({
+                title: "failed!",
+                icon: "error",
+                timerProgressBar: true,
+                timer: 2000,
+                background: '#6d6d6d',
+                color: '#ffffff',
+                showConfirmButton: false,
+                showCloseButton: true
+            });
         };
     };
 
@@ -248,7 +263,6 @@ const Register = () => {
                 </div>
 
                 <Button type="submit" disabled={!isValid} className="m-auto w-[20%] bg-pink-400 dark:border-black dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800">Sign Up</Button>
-                <ToastContainer />
             </form>
         </>
     )

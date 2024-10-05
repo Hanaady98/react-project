@@ -13,9 +13,7 @@ import CardDetails from "./Pages/CardDetails/CardDetails";
 import Home from "./Pages/Home/Home";
 import CardCreation from "./Pages/CardCreation/CardCreation";
 import UpdateCardDetails from "./Pages/UpdateCard/UpdateCard";
-import { ToastContainer } from "react-toastify";
-
-//to change the card details to update cards
+import UpdateUser from "./Pages/UpdateUser/UpdateUser";
 
 function App() {
 
@@ -29,6 +27,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/card/:id" element={<CardDetails />} />
+        <Route path="/edit-user/:id" element={<UpdateUser />} />
 
         <Route
           path="/edit-card/:id"
@@ -70,7 +69,6 @@ function App() {
       </Routes>
 
       <FooterP />
-      <ToastContainer />
     </>
   );
 };
