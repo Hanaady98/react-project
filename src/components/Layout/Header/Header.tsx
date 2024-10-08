@@ -15,6 +15,15 @@ const Header = () => {
     const dispatch = useDispatch();
     const nav = useNavigate();
 
+    //
+    const AdminProfile = () => {
+        if (isLoggedIn?.isAdmin) {
+            nav("/profile");
+        } else {
+            nav("/*");
+        };
+    };
+
     const logout = () => {
         Swal.fire({
             title: "Are you sure?",
@@ -27,6 +36,7 @@ const Header = () => {
             confirmButtonText: "Yes, log out!"
         }).then((result) => {
             if (result.isConfirmed) {
+                localStorage.removeItem("token");
                 dispatch(userActions.logout());
                 Swal.fire({
                     title: "You Logged Out!",
@@ -78,7 +88,10 @@ const Header = () => {
                 <Navbar.Toggle />
 
                 <Navbar.Collapse>
+
                     <Navbar.Brand className="gap-3 max-md:flex max-md:flex-col">
+
+                        {/*-------------------------home------------------------*/}
 
                         <Navbar.Link as={Link}
                             href="/home"
@@ -88,6 +101,8 @@ const Header = () => {
                             Home
                         </Navbar.Link>
 
+                        {/*----------------------------favorite cards------------------------*/}
+
                         {isLoggedIn && (<Navbar.Link
                             as={Link}
                             href="/favoritecards"
@@ -95,6 +110,8 @@ const Header = () => {
                             active={location === "/favoritecards"}>
                             Fav Cards
                         </Navbar.Link>)}
+
+                        {/*-------------------------my cards------------------------*/}
 
                         {isLoggedIn?.isBusiness && (<Navbar.Link
                             as={Link}
@@ -104,6 +121,8 @@ const Header = () => {
                             My Cards
                         </Navbar.Link>)}
 
+                        {/*-------------------------about------------------------*/}
+
                         <Navbar.Link as={Link}
                             href="/about"
                             to="/about"
@@ -111,6 +130,8 @@ const Header = () => {
                             className="ml-[10px] gap-3 max-md:flex max-md:flex-col max-md:items-center">
                             About
                         </Navbar.Link>
+
+                        {/*-------------------------sign up------------------------*/}
 
                         {!isLoggedIn && (<>
                             <Navbar.Link as={Link}
@@ -127,19 +148,45 @@ const Header = () => {
                             </Navbar.Link>
                         </>)}
 
+                        {/*-------------------------log out------------------------*/}
+
                         {isLoggedIn && (<Navbar.Link
                             className="cursor-pointer"
                             onClick={logout}>
                             LogOut
                         </Navbar.Link>)}
 
-                        {isLoggedIn && (<Navbar.Link
+                        {/*-------------------------profile------------------------*/}
+
+                        {isLoggedIn && !isLoggedIn.isAdmin && (
+                            <Navbar.Link
+                                as={Link}
+                                href="/profile"
+                                to="/profile"
+                                active={location === "/profile"}>
+                                Profile
+                            </Navbar.Link>
+                        )}
+
+                        {/*-------------------------admin's profile------------------------*/}
+
+                        <Navbar.Brand onClick={AdminProfile}>
+                            <img src="/admin.jpg" alt="admin's profile rabbit icon"
+                                style={{ width: "40px", borderRadius: "50%", marginRight: "10px" }}
+                                className="cursor-pointer" />
+                        </Navbar.Brand>
+
+                        {/*-------------------------CRM------------------------*/}
+
+                        {isLoggedIn?.isAdmin && (<Navbar.Link
                             as={Link}
-                            href="/profile"
-                            to="/profile"
-                            active={location === "/profile"}>
-                            Profile
+                            href="/crm"
+                            to="/crm"
+                            active={location === "/crm"}>
+                            CRM
                         </Navbar.Link>)}
+
+                        {/*-------------------------search------------------------*/}
 
                         <TextInput rightIcon={IoIosSearch} onChange={search} placeholder="Search..." />
                         <DarkThemeToggle className="gap-3 max-md:flex max-md:flex-col max-md:items-center" />

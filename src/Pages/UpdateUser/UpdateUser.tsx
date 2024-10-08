@@ -1,12 +1,3 @@
-//use state for the user
-//use paramas for the user id
-//get user by id
-// use effect to make the changes happen only when the component loads ONE time (to call the get user by id function)
-//i need to write the user details in the initialUpdateUser object like : user.title for instance
-//need the onSubmmit function and send a put request with the form so the user will be able to change the details they want
-//navigate to my profile
-//add the component in the app.tsx 
-
 import { useEffect, useState } from "react";
 import { TUser } from "../../Types/TUser";
 import { useNavigate, useParams } from "react-router-dom";
@@ -39,7 +30,7 @@ const UpdateUser = () => {
                 toast: true,
                 showCloseButton: true
             });
-        }
+        };
     };
 
     const initialUserData = {
@@ -49,7 +40,6 @@ const UpdateUser = () => {
             last: editUser?.name.last,
         },
         phone: editUser?.phone,
-        // email: editUser?.email,
         image: {
             url: editUser?.image.url,
             alt: editUser?.image.alt,
@@ -76,7 +66,6 @@ const UpdateUser = () => {
             const response = await axios.put("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/" + id, form);
 
             console.log('Updated User Data:', response.data);
-            await getUserData();
 
             Swal.fire({
                 title: "Done!",
@@ -114,7 +103,7 @@ const UpdateUser = () => {
 
     return (
         <>
-            <TitleSection title={'My Cards'} p={'Here you can find all your created business cards'} />
+            <TitleSection title={'My Profile'} p={'Here you can edit your profile details'} />
 
             <main className="flex items-center justify-center min-h-screen gap-3 bg-gradient-to-r from-pink-100 to-pink-200 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800">
                 <div className="flex flex-wrap items-center justify-center gap-10 p-5 m-auto bg-grey-800 max-md:flex-col max-md:gap-10 md:w-4/5">

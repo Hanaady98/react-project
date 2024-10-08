@@ -46,15 +46,23 @@ const Home = () => {
                                     alt={item.image.alt}
                                     className="w-[250px] h-[200px] object-cover cursor-pointer" />
 
-                                <h1 className="overflow-hidden text-ellipsis whitespace-nowrap">{item.title}</h1>
+                                <h1>{item.title}</h1>
+
+                                {/* <h1 className="overflow-hidden text-ellipsis whitespace-nowrap">{item.title}</h1> */}
                                 <hr />
                                 <div>
-                                    <p className="overflow-hidden text-ellipsis whitespace-nowrap">{item.description}</p>
+                                    <div className="overflow-hidden text-ellipsis whitespace-nowrap">
+                                        {/* <div className="max-h-[100px] h-[100px] overflow-hidden"> */}
+                                        <p> {item.description}</p>
+                                    </div>
+                                    {/* {item.description}</p> */}
                                     <p>{item.subtitle}</p>
                                     <p> Phone: {item.phone} </p>
                                     <p> Address: {item.address.city} </p>
                                     <p> Card Number: {item.bizNumber} </p>
+                                    {/* </div> */}
                                 </div>
+
                                 <div className="flex">
                                     <div className="flex gap-10 m-auto">
                                         <a href={`tel:${item.phone}`}>
@@ -68,6 +76,7 @@ const Home = () => {
                                                 color={isCardLiked(item) ? "red" : "black"}
                                                 onClick={() => likeOrUnlikedCard(item)}
                                             />}
+
                                     </div>
                                 </div>
                             </Card>

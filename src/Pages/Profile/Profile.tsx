@@ -1,12 +1,39 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { TRootState } from "../../Store/BigPie"
 import { Card } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 import { BsPencilSquare } from "react-icons/bs";
+import axios from "axios";
+import { userActions } from "../../Store/UserSlice";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 const Profile = () => {
+
     const user = useSelector((state: TRootState) => state.UserSlice.user);
     const nav = useNavigate();
+    const dispatch = useDispatch();
+
+    //the get data function is so we can update the login details redux for the user and we can see the changes visually  
+    const getData = async () => {
+        try {
+            axios.defaults.headers.common['x-auth-token'] = localStorage.getItem("token") || "";
+            const res = await axios.get("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/" + user?._id);
+            dispatch(userActions.login(res.data));
+        } catch (error) {
+            Swal.fire({
+                title: "failed!",
+                icon: "error",
+                timerProgressBar: true,
+                timer: 2000,
+                showCloseButton: true
+            });
+        };
+    };
+
+    useEffect(() => {
+        getData();
+    }, []);
 
     return (
         <>

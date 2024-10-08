@@ -34,7 +34,7 @@ const Register = () => {
         isBusiness: false,
     };
 
-    const { register, handleSubmit, formState: { errors, isValid } } = useForm({
+    const { register, handleSubmit, formState: { errors, isValid, isDirty } } = useForm({
         defaultValues: initialFormData,
         //when to update the changes
         mode: "onChange",
@@ -74,25 +74,28 @@ const Register = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 p-4 pt-20 m-auto rounded-lg shadow-lg dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800 bg-gradient-to-r from-pink-100 to-pink-200">
 
                 <h1 className="mt-4 text-2xl font-bold text-center text-gray-800 dark:text-black">Sign Up</h1>
+
                 <div className="flex gap-3 m-auto">
                     <div className="flex flex-col">
                         <FloatingLabel
+                            helperText="* required"
                             label="Email"
                             type="email"
                             variant="standard"
                             {...register("email")}
-                            color={errors.email ? "error" : "success"}
+                            color={!isDirty ? 'default' : errors.email ? "error" : "success"}
                             className=" dark:text-black"
                         />
                         <span className="text-sm text-red-800">{errors.email?.message}</span>
                     </div>
                     <div className="flex flex-col">
                         <FloatingLabel
+                            helperText="* required"
                             label="Password"
                             type="password"
                             variant="standard"
                             {...register("password")}
-                            color={errors.password ? "error" : "success"}
+                            color={!isDirty ? 'default' : errors.password ? "error" : "success"}
                             className=" dark:text-black"
                         />
                         <span className="text-sm text-red-800">{errors.password?.message}</span>
@@ -102,11 +105,12 @@ const Register = () => {
                 <div className="flex gap-3 m-auto">
                     <div className="flex flex-col">
                         <FloatingLabel
+                            helperText="* required"
                             label="First Name"
                             type="text"
                             variant="standard"
                             {...register("name.first")}
-                            color={errors.name?.first ? "error" : "success"}
+                            color={!isDirty ? 'default' : errors.name?.first ? "error" : "success"}
                             className=" dark:text-black"
                         />
                         <span className="text-sm text-red-800">{errors.name?.first?.message}</span>
@@ -128,11 +132,12 @@ const Register = () => {
                 <div className="flex gap-3 m-auto">
                     <div className="flex flex-col">
                         <FloatingLabel
+                            helperText="* required"
                             label="Last Name"
                             type="text"
                             variant="standard"
                             {...register("name.last")}
-                            color={errors.name?.last ? "error" : "success"}
+                            color={!isDirty ? 'default' : errors.name?.last ? "error" : "success"}
                             className=" dark:text-black"
                         />
                         <span className="text-sm text-red-800">{errors.name?.last?.message}</span>
@@ -140,11 +145,12 @@ const Register = () => {
 
                     <div className="flex flex-col">
                         <FloatingLabel
+                            helperText="* required"
                             label="Phone Number"
                             type="number"
                             variant="standard"
                             {...register("phone")}
-                            color={errors.phone ? "error" : "success"}
+                            color={!isDirty ? 'default' : errors.phone ? "error" : "success"}
                             className=" dark:text-black"
                         />
                         <span className="text-sm text-red-800">{errors.phone?.message}</span>
@@ -154,11 +160,12 @@ const Register = () => {
                 <div className="flex gap-3 m-auto">
                     <div className="flex flex-col">
                         <FloatingLabel
+                            helperText="* required"
                             label="Image URL"
                             type="text"
                             variant="standard"
                             {...register("image.url")}
-                            color={errors.image?.url ? "error" : "success"}
+                            color={!isDirty ? 'default' : errors.image?.url ? "error" : "success"}
                             className=" dark:text-black"
                         />
                         <span className="text-sm text-red-800">{errors.image?.url?.message}</span>
@@ -180,22 +187,24 @@ const Register = () => {
                 <div className="flex gap-3 m-auto">
                     <div className="flex flex-col">
                         <FloatingLabel
+                            helperText="* required"
                             label="Country"
                             type="text"
                             variant="standard"
                             {...register("address.country")}
-                            color={errors.address?.country ? "error" : "success"}
+                            color={!isDirty ? 'default' : errors.address?.country ? "error" : "success"}
                             className=" dark:text-black"
                         />
                         <span className="text-sm text-red-800">{errors.address?.country?.message}</span>
                     </div>
                     <div className="flex flex-col">
                         <FloatingLabel
+                            helperText="* required"
                             label="City"
                             type="text"
                             variant="standard"
                             {...register("address.city")}
-                            color={errors.address?.city ? "error" : "success"}
+                            color={!isDirty ? 'default' : errors.address?.city ? "error" : "success"}
                             className=" dark:text-black"
                         />
                         <span className="text-sm text-red-800">{errors.address?.city?.message}</span>
@@ -217,11 +226,12 @@ const Register = () => {
 
                     <div className="flex flex-col">
                         <FloatingLabel
+                            helperText="* required"
                             label="Street"
                             type="text"
                             variant="standard"
                             {...register("address.street")}
-                            color={errors.address?.street ? "error" : "success"}
+                            color={!isDirty ? 'default' : errors.address?.street ? "error" : "success"}
                             className=" dark:text-black"
                         />
                         <span className="text-sm text-red-800">{errors.address?.street?.message}</span>
@@ -231,11 +241,12 @@ const Register = () => {
                 <div className="flex gap-3 m-auto">
                     <div className="flex flex-col">
                         <FloatingLabel
+                            helperText="* required"
                             label="House Number"
                             type="number"
                             variant="standard"
                             {...register("address.houseNumber")}
-                            color={errors.address?.houseNumber ? "error" : "success"}
+                            color={!isDirty ? 'default' : errors.address?.houseNumber ? "error" : "success"}
                             className=" dark:text-black"
                         />
                         <span className="text-sm text-red-800">{errors.address?.houseNumber?.message}</span>

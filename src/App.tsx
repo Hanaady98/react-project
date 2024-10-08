@@ -14,6 +14,8 @@ import Home from "./Pages/Home/Home";
 import CardCreation from "./Pages/CardCreation/CardCreation";
 import UpdateCardDetails from "./Pages/UpdateCard/UpdateCard";
 import UpdateUser from "./Pages/UpdateUser/UpdateUser";
+import Crm from "./Pages/Admin/Crm";
+
 
 function App() {
 
@@ -27,7 +29,23 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/card/:id" element={<CardDetails />} />
-        <Route path="/edit-user/:id" element={<UpdateUser />} />
+
+        {/*---------------------------------------------------------------------------*/}
+
+        <Route path="/crm"
+          element={
+            <RouteGuard adminOnly>
+              <Crm />
+            </RouteGuard>
+          } />
+
+        <Route path="/edit-user/:id"
+          element={
+            <RouteGuard>
+              <UpdateUser />
+            </RouteGuard>
+          } />
+
 
         <Route
           path="/edit-card/:id"
@@ -66,6 +84,7 @@ function App() {
           } />
 
         <Route path="/*" element={<Error />} />
+
       </Routes>
 
       <FooterP />

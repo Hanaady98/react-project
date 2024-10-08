@@ -24,4 +24,4 @@ const userSlice = createSlice({
 export const userActions = userSlice.actions;
 export default userSlice.reducer;
 export type TUserState = typeof initialUserState;
-export type TUserLoginPayLoad = { userName: string }; 
+// export type TUserLoginPayLoad = { userName: string }; 
