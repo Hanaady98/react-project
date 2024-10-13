@@ -2,6 +2,7 @@ const About = () => {
     return (
         <>
             <div className="flex flex-col items-center w-full min-h-screen gap-5 p-6 pt-20 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800 bg-gradient-to-r from-pink-100 to-pink-200">
+
                 <div className="max-w-4xl dark:text-white">
 
                     <h1 className="mt-5 mb-4 text-3xl text-center"> About Us </h1>
@@ -17,8 +18,8 @@ const About = () => {
                     <h1 className="mt-5 mb-4 text-3xl text-center">  Browse </h1>
                     <p className="mb-8 text-xl text-center ">Explore a wide range of business cards within our app. Find inspiration, discover new contacts, and connect with professionals from various industries. </p>
 
-                    {/* <h1 className="mt-5 mb-4 text-3xl text-center">  CRM for Admins </h1>
-                    <p className="mb-8 text-xl text-center "> Our comprehensive CRM features enable admins to manage business card data, users data, and maintain valuable business relationships. Stay on top of your networking game with advanced analytics and reporting tools.</p> */}
+                    <h1 className="mt-5 mb-4 text-3xl text-center">  CRM For Admins </h1>
+                    <p className="mb-8 text-xl text-center "> Our comprehensive CRM features enable admins to manage users data, and maintain valuable business relationships. Stay on top of your networking game with advanced analytics and reporting tools.</p>
 
                 </div>
             </div>

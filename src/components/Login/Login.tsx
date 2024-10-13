@@ -44,7 +44,7 @@ const Login = () => {
             /* we set the token in the axios headers */
             axios.defaults.headers.common['x-auth-token'] = token.data;
 
-            /* then we get the user data using the id from the decoded token  */
+            /* then we get the user data using the id from the decoded token */
             const user = await axios.get("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/" + id);
             /* we dispatch the user data to the redux store (dispatch helps us get to the actions/reducers) */
             dispatch(userActions.login(user.data));

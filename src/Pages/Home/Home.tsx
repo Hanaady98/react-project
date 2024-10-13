@@ -65,6 +65,7 @@ const Home = () => {
 
                                 <div className="flex">
                                     <div className="flex gap-10 m-auto">
+
                                         <a href={`tel:${item.phone}`}>
                                             <FaPhoneAlt className="m-auto cursor-pointer" />
                                         </a>
