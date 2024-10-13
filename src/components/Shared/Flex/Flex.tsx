@@ -1,5 +1,6 @@
-import { FlexAligns } from "../../enums/FlexAligns";
-import { FlexDirections } from "../../enums/FlexDirections";
+import { FlexAligns } from "../../../enums/FlexAligns";
+import { FlexDirections } from "../../../enums/FlexDirections";
+
 
 type FlexProps = {
     children: React.ReactNode;

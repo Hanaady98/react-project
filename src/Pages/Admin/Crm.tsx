@@ -8,9 +8,8 @@ import { useEffect, useState } from "react";
 import { TUser } from "../../Types/TUser";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { Button, Card, Table } from "flowbite-react";
+import { Button, Card } from "flowbite-react";
 import TitleSection from "../../components/Shared/TitleSection/TitleSection";
-import { TableTheme } from "../../Themes/TableTheme";
 
 const Crm = () => {
     //users is where the fetched data is stored for rendering
@@ -143,40 +142,36 @@ const Crm = () => {
 
             <main className="flex justify-center min-h-screen gap-3 dark:bg-gray-800 bg-gradient-to-r from-pink-100 to-pink-200 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800">
 
-                <div className="mt-20 overflow-x-auto text-center">
-                    {users.map((item: TUser) => {
-                        return (
-                            <Table striped theme={TableTheme} key={item._id}>
-                                <Table.Head>
-                                    <Table.HeadCell>Name</Table.HeadCell>
-                                    <Table.HeadCell>Email</Table.HeadCell>
-                                    <Table.HeadCell>Phone</Table.HeadCell>
-                                    <Table.HeadCell>authorization level</Table.HeadCell>
-                                </Table.Head>
-
-                                <Table.Body className="text-black divide-y cursor-pointer">
-
-                                    <Table.Row
-                                        onClick={() => {
-                                            setSelectedUser(item)
-                                            console.log(item);
-                                        }}>
-
-                                        <Table.Cell>
-                                            {item.name.first + " " + item.name.middle + " " + item.name.last}
-                                        </Table.Cell>
-                                        <Table.Cell>{item.email}</Table.Cell>
-                                        <Table.Cell>{item.phone}</Table.Cell>
-
-                                        <Table.Cell>
-                                            {item.isAdmin ? "Admin" : item.isBusiness ? "Business" : "Personal"}
-                                        </Table.Cell>
-                                    </Table.Row>
-                                </Table.Body>
-                            </Table>
-                        )
-                    })}
+                <div className="mt-20 overflow-x-auto text-center max-w-[90vw]">
+                    <table className="w-full table-auto">
+                        <thead className="bg-pink-200 dark:bg-gray-600">
+                            <tr>
+                                <th className="px-4 py-2 text-gray-800 dark:text-white">Name</th>
+                                <th className="px-4 py-2 text-gray-800 dark:text-white">Email</th>
+                                <th className="px-4 py-2 text-gray-800 dark:text-white">Phone</th>
+                                <th className="px-4 py-2 text-gray-800 dark:text-white">Authorization Level</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {users.map((item: TUser) => (
+                                <tr
+                                    key={item._id}
+                                    className="divide-y cursor-pointer odd:bg-pink-300 even:bg-pink-400 odd:dark:bg-gray-800 even:dark:bg-gray-700 hover:bg-pink-500 dark:hover:bg-gray-600"
+                                    onClick={() => setSelectedUser(item)} >
+                                    <td className="px-4 py-2 text-gray-800 border dark:text-white">
+                                        {item.name.first + " " + item.name.middle + " " + item.name.last}
+                                    </td>
+                                    <td className="px-4 py-2 text-gray-800 border dark:text-white">{item.email}</td>
+                                    <td className="px-4 py-2 text-gray-800 border dark:text-white">{item.phone}</td>
+                                    <td className="px-4 py-2 text-gray-800 border dark:text-white">
+                                        {item.isAdmin ? "Admin" : item.isBusiness ? "Business" : "Personal"}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
+
             </main>
 
             {/*-------------------user details----------------*/}
@@ -198,7 +193,8 @@ const Crm = () => {
                                 shadow-slate-800
                                 dark:shadow-slate-
                                 mb-10">
-                        <h1>{selectedUser?.name.first + " " + selectedUser?.name.middle + " " + selectedUser?.name.last}</h1>
+                        <h1>{selectedUser?.name.first + " " + selectedUser?.name.middle
+                            + " " + selectedUser?.name.last}</h1>
                         <h1>{selectedUser?.email}</h1>
                         <h1>{selectedUser?.phone}</h1>
                         <h1>{selectedUser?.isBusiness ? "Business" : "Personal"}</h1>
