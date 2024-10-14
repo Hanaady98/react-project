@@ -79,7 +79,7 @@ const Header = () => {
             <Navbar fluid rounded className="fixed w-[100%] bg-pink-300 z-50">
 
                 <Navbar.Brand as={Link} href="/" to="/">
-                    <img src="/bunny.jpg" alt="" style={{ width: "40px", borderRadius: "50%", marginRight: "10px" }} />
+                    <img src="/bunny.jpg" alt="bunny's pic" style={{ width: "40px", borderRadius: "50%", marginRight: "10px" }} />
                     <span className="self-center text-2xl font-semibold whitespace-nowrap text-pink-950 dark:text-gray-400">
                         Hanady
                     </span>

@@ -1,13 +1,15 @@
 import { useEffect } from "react"; //React hooks for managing state and side effects.
 import { TCard } from "../../Types/TCard";
-import { Card } from "flowbite-react";
+import { Card, Pagination } from "flowbite-react";
 import { FaPhoneAlt, FaHeart } from "react-icons/fa";
 import TitleSection from "../../components/Shared/TitleSection/TitleSection";
 import UseCards from "../../Hooks/UseCards";
+import UsePagination from "../../Hooks/UsePagination";
 
 const FavoriteCards = () => {
 
     const { searchFavoriteCards, getCardsData, navigateToCardDetails, isCardLiked, likeOrUnlikedCard, user } = UseCards();
+    const { onPageChange, currentCards, totalPages, currentPage } = UsePagination(searchFavoriteCards);
 
     /* Calls getCardsData when the component mounts (for instance when it first loads). */
     useEffect(() => {
@@ -21,7 +23,7 @@ const FavoriteCards = () => {
             <main className="flex items-center justify-center min-h-screen gap-3 bg-gradient-to-r from-pink-100 to-pink-200 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800 ">
 
                 <div className="flex flex-wrap items-center justify-center gap-10 p-5 m-auto bg-grey-800 max-md:flex-col max-md:gap-10 md:w-4/5">
-                    {searchFavoriteCards()!.map((item: TCard) => {
+                    {currentCards.map((item: TCard) => {
                         return (
                             <Card key={item._id}
                                 className="dark:bg-pink-400 
@@ -79,6 +81,12 @@ const FavoriteCards = () => {
                     })}
                 </div>
             </main>
+            <Pagination className="text-center bg-pink-300 dark:bg-gray-600 "
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={onPageChange}
+                showIcons
+            />
         </>
     )
 };

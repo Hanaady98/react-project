@@ -41,7 +41,7 @@ const CardDetails = () => {
                     <Card key={card?._id}
                         className="
                         m-auto max-md:w-[300px] 
-                        mt-0 h-[500px] w-[350px]
+                        mt-0 h-[600px] w-[350px]
                         bg-gradient-to-r from-pink-200 to-pink-300
                         border-black
                         dark:border-black
@@ -54,8 +54,7 @@ const CardDetails = () => {
                     dark:shadow-slate-500
                     hover:opacity-70
                     transition-all
-                    duration-300
-                        ">
+                    duration-300">
 
                         <h1 style={{ fontSize: "1.4rem" }} className="text-center">{card && card!.title}</h1>
                         <img src={card?.image.url} alt={card?.image.alt} className="object-fill w-[350px] h-[200px]" />
@@ -63,7 +62,7 @@ const CardDetails = () => {
                         <div className="flex flex-col gap-4 text-center">
                             <h1 >Email: {card && card!.email!}</h1>
                             <h1 >Phone: {card && card!.phone!}</h1>
-                            <h1 className="max-md-[250px] overflow-clip">Description: {card && card!.description}</h1>
+                            <h1 className="max-md-[250px] max-h-[150px] overflow-x-auto">Description: {card && card!.description}</h1>
                             <h1 >
                                 Address: {card?.address.country + ", " + card?.address.city + ", " + card?.address.street}</h1>
                         </div>

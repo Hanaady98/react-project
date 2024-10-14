@@ -2,12 +2,13 @@ import TitleSection from "../../components/Shared/TitleSection/TitleSection";
 import { useEffect } from "react"; //React hooks
 import { TCard } from "../../Types/TCard";
 import { useNavigate } from "react-router-dom";  //Hook for navigating between routes.
-import { Card } from "flowbite-react";
+import { Card, Pagination } from "flowbite-react";
 import { FaPhoneAlt, FaHeart } from "react-icons/fa";
 import { BsPencilSquare } from "react-icons/bs";
 import { BsTrash3Fill } from "react-icons/bs";
 import { PiPlus } from "react-icons/pi";
 import UseCards from "../../Hooks/UseCards";
+import UsePagination from "../../Hooks/UsePagination";
 
 const MyCards = () => {
 
@@ -20,6 +21,9 @@ const MyCards = () => {
         user,
         deleteCard
     } = UseCards();
+
+    const { onPageChange, currentCards, totalPages, currentPage } = UsePagination(searchCards);
+
 
     const nav = useNavigate();
 
@@ -38,7 +42,7 @@ const MyCards = () => {
 
             <main className="flex items-center justify-center min-h-screen gap-3 bg-gradient-to-r from-pink-100 to-pink-200 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800">
                 <div className="flex flex-wrap items-center justify-center gap-10 p-5 m-auto bg-grey-800 max-md:flex-col max-md:gap-10 md:w-4/5">
-                    {searchCards()!.map((item: TCard) => {
+                    {currentCards.map((item: TCard) => {
                         return (
                             <Card key={item._id}
                                 className="
@@ -108,12 +112,19 @@ const MyCards = () => {
                         )
                     })}
 
+
                     <div className="fixed flex p-5 bg-pink-300 rounded-full cursor-pointer dark:bg-white right-10 top-31 bottom-10">
                         <PiPlus size={30} onClick={navigateToCardCreation} />
                     </div>
 
                 </div>
             </main>
+            <Pagination className="text-center bg-pink-300 dark:bg-gray-600 "
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={onPageChange}
+                showIcons
+            />
         </>
     )
 };
