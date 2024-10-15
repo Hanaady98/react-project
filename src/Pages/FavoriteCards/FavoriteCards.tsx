@@ -81,7 +81,7 @@ const FavoriteCards = () => {
                     })}
                 </div>
             </main>
-            <Pagination className="text-center bg-pink-300 dark:bg-gray-600 "
+            <Pagination className="m-auto w-fit"
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={onPageChange}

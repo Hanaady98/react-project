@@ -152,7 +152,7 @@ const Crm = () => {
 
     return (
         <>
-            <div className="min-h-screen ">
+            <div className="min-h-screen dark:bg-gray-800 bg-gradient-to-r from-pink-100 to-pink-200 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800">
                 <TitleSection
                     title={"Client Relations/Content Management"}
                     p={"here you can View/Edit/Delete users, please click a record to view full details"} />
@@ -188,7 +188,10 @@ const Crm = () => {
                             </tbody>
                         </table>
                     </div>
+
+
                 </main>
+                <img src="/banner.webp" alt="banner pic with flowers" className="m-auto" />
 
 
                 {/*-------------------user details----------------*/}
@@ -231,7 +234,7 @@ const Crm = () => {
                         </Card>
                     </div>
                 )}
-                <Pagination className="text-center bg-pink-300 dark:bg-gray-600 "
+                <Pagination className="m-auto w-fit"
                     currentPage={currentPage}
                     totalPages={totalPages}
                     onPageChange={onPageChange}
