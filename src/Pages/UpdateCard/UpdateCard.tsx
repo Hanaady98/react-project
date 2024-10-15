@@ -141,9 +141,9 @@ const UpdateCardDetails = () => {
                             Description</label>
 
                         <textarea id="message" defaultValue={card?.description} {...register("description")}
-                            className="block p-2.5 w-[500px] h-[200px] m-auto text-sm text-gray-900 bg-gray-50
+                            className="block p-2.5 w-[300px] h-[200px] m-auto text-sm text-gray-900 bg-pink-50
                         rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500
-                        dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+                        dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black
                         dark:focus:ring-blue-500 dark:focus:border-blue-500 resize-none"
                             placeholder="Write your card description here...">
                         </textarea>
