@@ -7,6 +7,8 @@ const incrementFailedAttempts = () => {
     let currentCount = attempts === null ? 0 : Number(attempts);
     currentCount += 1;
     localStorage.setItem("failedattempts", currentCount.toString());
+    console.log(currentCount);
+    console.log("Failed Attempts Count: ", localStorage.getItem("failedattempts"));
 };
 
 /* Retrieve the current count of failed attempts.
@@ -55,10 +57,11 @@ we’ll later compare this time to see if 24 hours have passed. */
 const checkLockoutStatus = () => {
     const storedLockoutTime = localStorage.getItem("lockoutTime");
     let lockoutTimestamp = storedLockoutTime === null ? 0 : Number(storedLockoutTime);
-    const lockoutDurationMilliseconds = 24 * 60 * 60 * 1000;
+    const lockoutDurationMilliseconds = 10 * 1000;
     const lockoutExpiryTime = lockoutTimestamp + lockoutDurationMilliseconds;
     const newDate = Date.now();
     let failedattempts = lockoutExpiryTime >= newDate;
+    console.log(failedattempts);
     return failedattempts;
 };
 
