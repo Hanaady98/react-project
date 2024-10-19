@@ -13,8 +13,8 @@ import CardDetails from "./Pages/CardDetails/CardDetails";
 import Home from "./Pages/Home/Home";
 import CardCreation from "./Pages/CardCreation/CardCreation";
 import UpdateCardDetails from "./Pages/UpdateCard/UpdateCard";
-import UpdateUser from "./Pages/UpdateUser/UpdateUser";
 import Crm from "./Pages/Admin/Crm";
+import UpdateUser from "./Pages/UpdateUser/UpdateUser";
 
 
 function App() {
