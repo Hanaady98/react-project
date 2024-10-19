@@ -57,7 +57,7 @@ we’ll later compare this time to see if 24 hours have passed. */
 const checkLockoutStatus = () => {
     const storedLockoutTime = localStorage.getItem("lockoutTime");
     let lockoutTimestamp = storedLockoutTime === null ? 0 : Number(storedLockoutTime);
-    const lockoutDurationMilliseconds = 10 * 1000;
+    const lockoutDurationMilliseconds = 24 * 60 * 60 * 1000;
     const lockoutExpiryTime = lockoutTimestamp + lockoutDurationMilliseconds;
     const newDate = Date.now();
     let failedattempts = lockoutExpiryTime >= newDate;
