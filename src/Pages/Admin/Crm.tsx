@@ -47,7 +47,7 @@ const Crm = () => {
                 timer: 2000,
                 showCloseButton: true
             });
-        }
+        };
     };
 
     //patch request - to edit the auth level
