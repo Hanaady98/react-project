@@ -10,7 +10,6 @@ import { userActions } from "../../Store/UserSlice";
 import { useNavigate } from "react-router-dom";
 import { decode } from "../../Services/TokenService";
 import Swal from "sweetalert2";
-import { checkFailedAttempts, checkLockoutStatus, incrementFailedAttempts, resetFailedAttempts, setLockoutTime } from "../../BlockedUser/BlockedUser";
 
 const Login = () => {
 
@@ -30,21 +29,6 @@ const Login = () => {
 
     const onSubmit = async (form: typeof initialFormData) => {
         try {
-            if (checkLockoutStatus()) {
-                // Show the Swal alert for the lockout
-                Swal.fire({
-                    title: "YOU ARE LOCKED FOR 24HRS!",
-                    icon: "error", // Use error for lockout
-                    timerProgressBar: true,
-                    timer: 2000,
-                    background: '#6d6d6d',
-                    color: '#ffffff',
-                    showConfirmButton: false,
-                    showCloseButton: true,
-                });
-                // Stop further execution by returning early
-                return;
-            };
             /* first of all we send a post request to the login endpoint with the form data */
             const token = await axios.post('https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/login', form);
 
@@ -62,7 +46,6 @@ const Login = () => {
             /* then we get the user data using the id from the decoded token */
             const user = await axios.get("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/" + id);
             /* we dispatch the user data to the redux store (dispatch helps us get to the actions/reducers) */
-            resetFailedAttempts();
             dispatch(userActions.login(user.data));
             Swal.fire({
                 title: "You Logged in!",
@@ -76,11 +59,6 @@ const Login = () => {
             });
             nav("/");
         } catch (error) {
-            incrementFailedAttempts();
-            const isLocked = checkFailedAttempts();
-            if (isLocked) {
-                setLockoutTime();
-            };
             Swal.fire({
                 title: "failed!",
                 icon: "error",

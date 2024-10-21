@@ -15,7 +15,6 @@ const Header = () => {
     const dispatch = useDispatch();
     const nav = useNavigate();
 
-    //
     const AdminProfile = () => {
         if (isLoggedIn?.isAdmin) {
             nav("/profile");
