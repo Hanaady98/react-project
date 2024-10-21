@@ -1,5 +1,4 @@
 export const initialCardData = {
-
     title: "",
     subtitle: "",
     description: "",

@@ -1,9 +1,3 @@
-//i think we need the tuser saved in userstate so we could get the id and also update the responses
-//get request to get all users
-//patch request to change the authorization level (we need id too)
-//delete request to remove the user by their id (might need an array like we did in the delete card)
-//(map)Iterate over the users to display them in a list, and show selected user details when needed.
-
 import { useEffect, useState } from "react";
 import { TUser } from "../../Types/TUser";
 import axios from "axios";
@@ -25,14 +19,14 @@ const Crm = () => {
     const searchWord = useSelector((state: TRootState) => state.SearchSlice.search);
 
     /* Filters the cards to include only those that match the search word. */
-    const searchCards = () => {
+    const searchUsers = () => {
         return users.filter((item: TUser) =>
             item.name.first.includes(searchWord) ||
             item.name.middle.includes(searchWord) ||
             item.name.last.includes(searchWord)
         );
     };
-    const { onPageChange, currentCards, totalPages, currentPage } = UsePagination(searchCards);
+    const { onPageChange, currentInUse, totalPages, currentPage } = UsePagination(searchUsers);
 
     const getAllUsers = async () => {
         try {
@@ -70,9 +64,6 @@ const Crm = () => {
             axios.defaults.headers.common['x-auth-token'] = localStorage.getItem("token");
             const response = await axios.patch("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/" + user._id,
                 { isBusiness: !user.isBusiness });
-
-            console.log(response);
-            console.log(user);
 
             if (response.status === 200) {
                 const usersIndex = users.indexOf(user);
@@ -145,7 +136,6 @@ const Crm = () => {
         };
     };
 
-    //
     useEffect(() => {
         getAllUsers();
     }, []);
@@ -170,7 +160,7 @@ const Crm = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {currentCards.map((item: TUser) => (
+                                {currentInUse.map((item: TUser) => (
                                     <tr
                                         key={item._id}
                                         className="divide-y cursor-pointer odd:bg-pink-300 even:bg-pink-400 odd:dark:bg-gray-800 even:dark:bg-gray-700 hover:bg-pink-500 dark:hover:bg-gray-600"

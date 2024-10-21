@@ -10,10 +10,10 @@ const UsePagination = (searchCards: any) => {
     const indexOfLastCard = currentPage * cardsPerPage;
     const indexOfFirstCard = indexOfLastCard - cardsPerPage;
     const allCards = searchCards();
-    const currentCards = allCards.slice(indexOfFirstCard, indexOfLastCard);
+    const currentInUse = allCards.slice(indexOfFirstCard, indexOfLastCard);
     const totalPages = Math.ceil(allCards.length / cardsPerPage);
 
-    return { cardsPerPage, onPageChange, currentCards, totalPages, currentPage, setCurrentPage, indexOfLastCard, indexOfFirstCard }
+    return { cardsPerPage, onPageChange, currentInUse, totalPages, currentPage, setCurrentPage, indexOfLastCard, indexOfFirstCard }
 
 };
 

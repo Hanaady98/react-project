@@ -58,7 +58,6 @@ const Header = () => {
     };
 
     const location = useLocation().pathname;
-    console.log(location);
 
     useEffect(() => {
         const token = localStorage.getItem("token");

@@ -1,12 +1,3 @@
-//use state for the card
-//use params for the card id
-//the get user by id
-// use effect to make the changes happen only when the component loads ONE time (to call the get user by id function)
-//i need to write the user details in the initialUpdateCard object like : card.title for instance
-//need the onSubmmit function and send a put request with the form
-//navigate to my cards page
-//change the component name in the app.tsx
-
 import { useEffect, useState } from "react";
 import { TCard } from "../../Types/TCard";
 import { useNavigate, useParams } from "react-router-dom";

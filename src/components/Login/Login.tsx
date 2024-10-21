@@ -34,7 +34,7 @@ const Login = () => {
 
             /* if the login is successful we get a token from the response and then we store it in localStorage */
             localStorage.setItem("token", token.data);
-            console.log("data", token.data);
+
             /* we save the decoded id from the response we got previously from the token
             (we choose the .data since it's an object),
             in a variable so it's easier to use for later */

@@ -9,7 +9,7 @@ import UsePagination from "../../Hooks/UsePagination";
 const Home = () => {
 
     const { searchCards, likeOrUnlikedCard, navigateToCardDetails, getCardsData, isCardLiked, user } = UseCards();
-    const { onPageChange, currentCards, totalPages, currentPage } = UsePagination(searchCards);
+    const { onPageChange, currentInUse, totalPages, currentPage } = UsePagination(searchCards);
 
     /* Calls getCardsData when the component mounts (for instance when it first loads). */
     useEffect(() => {
@@ -22,7 +22,7 @@ const Home = () => {
             <main className="flex items-center justify-center min-h-screen gap-3 bg-gradient-to-r from-pink-100 to-pink-200 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800">
 
                 <div className="flex flex-wrap items-center justify-center gap-10 p-5 m-auto max-md:flex-col max-md:gap-10 md:w-4/5">
-                    {currentCards.map((item: TCard) => {
+                    {currentInUse.map((item: TCard) => {
                         return (
                             <Card key={item._id}
                                 className="dark:bg-pink-400 
@@ -53,15 +53,12 @@ const Home = () => {
                                 <hr />
                                 <div>
                                     <div className="overflow-hidden text-ellipsis whitespace-nowrap">
-                                        {/* <div className="max-h-[100px] h-[100px] overflow-hidden"> */}
                                         <p> {item.description}</p>
                                     </div>
-                                    {/* {item.description}</p> */}
                                     <p>{item.subtitle}</p>
                                     <p> Phone: {item.phone} </p>
                                     <p> Address: {item.address.city} </p>
                                     <p> Card Number: {item.bizNumber} </p>
-                                    {/* </div> */}
                                 </div>
 
                                 <div className="flex">

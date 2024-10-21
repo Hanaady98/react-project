@@ -42,5 +42,3 @@ export const CardCreationSchema = Joi.object({
     bizNumber: Joi.number().allow(""),
     user_id: Joi.string().allow(""),
 });
-// .options({ stripUnknown: true });
-

@@ -19,9 +19,6 @@ const CardCreation = () => {
         mode: "onChange",
         resolver: joiResolver(CardCreationSchema)
     });
-    console.log(errors);
-    console.log(isValid);
-
 
     const onSubmit = async (form: typeof initialCardData) => {
         try {

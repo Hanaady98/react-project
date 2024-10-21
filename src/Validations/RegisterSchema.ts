@@ -1,9 +1,5 @@
 import Joi from "joi";
 
-//pattern or regex are the same thing 
-//rule takes an object and includes a message inside 
-//rulest is when we want to write the the neccessary regex 
-
 const RegisterSchema = Joi.object({
     email: Joi.string().ruleset.pattern(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/)
         .rule({

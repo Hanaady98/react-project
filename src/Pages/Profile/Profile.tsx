@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { TRootState } from "../../Store/BigPie"
 import { Button, Card } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
-// import { BsPencilSquare } from "react-icons/bs";
 import axios from "axios";
 import { userActions } from "../../Store/UserSlice";
 import { useEffect } from "react";
