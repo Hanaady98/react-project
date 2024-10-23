@@ -100,7 +100,7 @@ const UpdateCardDetails = () => {
 
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 p-4 m-auto rounded-lg shadow-lg bg-gradient-to-r from-pink-100 to-pink-200 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800 ">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 p-4 m-auto rounded-lg shadow-lg">
                 <h1 className="pt-20 text-2xl font-bold text-center dark:text-gray-400"> Editing Card Details </h1>
 
                 <div className="flex gap-3 m-auto">

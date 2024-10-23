@@ -40,7 +40,7 @@ const MyCards = () => {
         <>
             <TitleSection title={'My Cards'} p={'Here you can find all your created business cards'} />
 
-            <main className="flex items-center justify-center min-h-screen gap-3 bg-gradient-to-r from-pink-100 to-pink-200 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800">
+            <main className="flex items-center justify-center min-h-screen gap-3">
                 <div className="flex flex-wrap items-center justify-center gap-10 p-5 m-auto bg-grey-800 max-md:flex-col max-md:gap-10 md:w-4/5">
                     {currentInUse.map((item: TCard) => {
                         return (

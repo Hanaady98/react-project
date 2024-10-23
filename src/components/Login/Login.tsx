@@ -71,7 +71,7 @@ const Login = () => {
     };
 
     return (
-        <Flex items={FlexAligns.CENTER} justify={FlexAligns.CENTER} className="w-full min-h-screen m-auto bg-gradient-to-r from-pink-100 to-pink-200 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800">
+        <Flex items={FlexAligns.CENTER} justify={FlexAligns.CENTER} className="w-full min-h-screen m-auto">
 
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center h-[400px] p-3 w-[400px] gap-4 m-auto rounded-lg shadow-lg bg-pink-200 border-b-8 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800 dark:border-black">
                 <h1 className="text-2xl font-bold text-gray-800">Log In</h1>

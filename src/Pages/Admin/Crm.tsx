@@ -142,12 +142,12 @@ const Crm = () => {
 
     return (
         <>
-            <div className="min-h-screen dark:bg-gray-800 bg-gradient-to-r from-pink-100 to-pink-200 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800">
+            <div className="min-h-screen">
                 <TitleSection
                     title={"Client Relations/Content Management"}
                     p={"here you can View/Edit/Delete users, please click a record to view full details"} />
 
-                <main className="flex justify-center gap-3 dark:bg-gray-800 bg-gradient-to-r from-pink-100 to-pink-200 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800">
+                <main className="flex justify-center gap-3">
 
                     <div className="mt-20 overflow-x-auto text-center max-w-[90vw]">
                         <table className="w-full table-auto">
@@ -186,7 +186,7 @@ const Crm = () => {
 
                 {/*-------------------user details----------------*/}
                 {selectedUser && (
-                    <div className="flex flex-col items-center dark:bg-gray-800 bg-gradient-to-r from-pink-100 to-pink-200 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800">
+                    <div className="flex flex-col items-center">
 
                         <h1 className="mt-8 mb-1 text-xl font-medium text-gray-900 dark:text-white"> More Details </h1>
                         <Card key={selectedUser?._id}

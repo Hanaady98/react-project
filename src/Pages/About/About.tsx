@@ -1,7 +1,8 @@
 const About = () => {
+
     return (
         <>
-            <div className="flex flex-col items-center w-full min-h-screen gap-5 p-6 pt-20 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800 bg-gradient-to-r from-pink-100 to-pink-200">
+            <div className="flex flex-col items-center w-full min-h-screen gap-5 p-6 pt-20">
 
                 <div className="max-w-4xl dark:text-white">
 

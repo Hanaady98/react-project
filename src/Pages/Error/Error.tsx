@@ -12,7 +12,7 @@ const Error = () => {
 
     return (
         <>
-            <div className="flex flex-col items-center justify-center h-screen gap-10 bg-gradient-to-r from-pink-100 to-pink-200 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800">
+            <div className="flex flex-col items-center justify-center h-screen gap-10">
                 <h1 className="text-3xl">404</h1>
                 <p className="text-2xl">Sorry, the page you were looking for was not found!</p>
                 <MdHeartBroken size={60} />

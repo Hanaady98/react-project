@@ -71,7 +71,7 @@ const Register = () => {
 
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 p-4 pt-20 m-auto rounded-lg shadow-lg dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800 bg-gradient-to-r from-pink-100 to-pink-200">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 p-4 pt-20 m-auto rounded-lg shadow-lg">
 
                 <h1 className="mt-4 text-2xl font-bold text-center text-gray-800 dark:text-black">Sign Up</h1>
 

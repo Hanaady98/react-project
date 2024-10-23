@@ -100,7 +100,7 @@ const UpdateUser = () => {
         <>
             <TitleSection title={'My Profile'} p={'Here you can edit your profile details'} />
 
-            <main className="flex items-center justify-center min-h-screen gap-3 bg-gradient-to-r from-pink-100 to-pink-200 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800">
+            <main className="flex items-center justify-center min-h-screen gap-3">
                 <div className="flex flex-wrap items-center justify-center gap-10 p-5 m-auto bg-grey-800 max-md:flex-col max-md:gap-10 md:w-4/5">
 
                     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 p-4 m-auto rounded-lg shadow-lg bg-gradient-to-r from-pink-100 to-pink-200 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800 ">

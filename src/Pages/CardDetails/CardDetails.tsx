@@ -34,7 +34,7 @@ const CardDetails = () => {
         <>
             <TitleSection title={"Card Details"} p={"Here you will find all the details"} />
 
-            <div className="flex flex-col items-center justify-start h-screen dark:bg-gray-800 bg-gradient-to-r from-pink-100 to-pink-200 dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800">
+            <div className="flex flex-col items-center justify-start h-screen">
                 <div className="flex flex-wrap items-center justify-center gap-3 m-auto md:w-4/5 max-md:flex-col">
 
                     <Card
