@@ -78,7 +78,7 @@ const Header = () => {
 
                 <Navbar.Brand as={Link} href="/" to="/">
                     <img src="/bunny.jpg" alt="bunny's pic" style={{ width: "40px", borderRadius: "50%", marginRight: "10px" }} />
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap text-pink-950 dark:text-gray-400">
+                    <span className="self-center text-2xl font-semibold whitespace-nowrap text-pink-950 dark:text-container dark:text-white">
                         Hanady
                     </span>
                 </Navbar.Brand>

@@ -93,7 +93,6 @@ const MyCards = () => {
                                                 onClick={() => likeOrUnlikedCard(item)}
                                             />}
 
-
                                         <BsPencilSquare
                                             size={20}
                                             className="m-auto cursor-pointer"
