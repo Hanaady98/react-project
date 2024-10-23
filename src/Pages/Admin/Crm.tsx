@@ -16,6 +16,20 @@ const Crm = () => {
     //state for the selected user, we need it because we need to hold the user details in it
     const [selectedUser, setSelectedUser] = useState<TUser | null>(null);
 
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
     const searchWord = useSelector((state: TRootState) => state.SearchSlice.search);
 
     /* Filters the cards to include only those that match the search word. */
@@ -224,12 +238,36 @@ const Crm = () => {
                         </Card>
                     </div>
                 )}
-                <Pagination className="m-auto w-fit"
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={onPageChange}
-                    showIcons
-                />
+                <div className="flex justify-center mt-4">
+                    {isMobile ? (
+                        // For mobile: only show previous and next buttons
+                        <div className="flex">
+                            <Button
+                                gradientMonochrome="pink"
+                                onClick={() => onPageChange(currentPage - 1)}
+                                disabled={currentPage === 1}
+                                className="mr-2"
+                            >
+                                Previous
+                            </Button>
+                            <Button
+                                gradientMonochrome="pink"
+                                onClick={() => onPageChange(currentPage + 1)}
+                                disabled={currentPage === totalPages}
+                            >
+                                Next
+                            </Button>
+                        </div>
+                    ) : (
+                        // For desktop: show full pagination
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={onPageChange}
+                            showIcons
+                        />
+                    )}
+                </div>
             </div>
         </>
     )

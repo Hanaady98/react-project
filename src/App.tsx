@@ -16,7 +16,6 @@ import UpdateCardDetails from "./Pages/UpdateCard/UpdateCard";
 import Crm from "./Pages/Admin/Crm";
 import UpdateUser from "./Pages/UpdateUser/UpdateUser";
 
-
 function App() {
 
   return (

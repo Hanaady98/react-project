@@ -1,8 +1,8 @@
 import TitleSection from "../../components/Shared/TitleSection/TitleSection";
-import { useEffect } from "react"; //React hooks
+import { useEffect, useState } from "react"; //React hooks
 import { TCard } from "../../Types/TCard";
 import { useNavigate } from "react-router-dom";  //Hook for navigating between routes.
-import { Card, Pagination } from "flowbite-react";
+import { Button, Card, Pagination } from "flowbite-react";
 import { FaPhoneAlt, FaHeart } from "react-icons/fa";
 import { BsPencilSquare } from "react-icons/bs";
 import { BsTrash3Fill } from "react-icons/bs";
@@ -11,6 +11,20 @@ import UseCards from "../../Hooks/UseCards";
 import UsePagination from "../../Hooks/UsePagination";
 
 const MyCards = () => {
+
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
 
     const {
         searchCards,
@@ -118,12 +132,36 @@ const MyCards = () => {
 
                 </div>
             </main>
-            <Pagination className="m-auto w-fit"
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={onPageChange}
-                showIcons
-            />
+            <div className="flex justify-center mt-4">
+                {isMobile ? (
+                    // For mobile: only show previous and next buttons
+                    <div className="flex">
+                        <Button
+                            gradientMonochrome="pink"
+                            onClick={() => onPageChange(currentPage - 1)}
+                            disabled={currentPage === 1}
+                            className="mr-2"
+                        >
+                            Previous
+                        </Button>
+                        <Button
+                            gradientMonochrome="pink"
+                            onClick={() => onPageChange(currentPage + 1)}
+                            disabled={currentPage === totalPages}
+                        >
+                            Next
+                        </Button>
+                    </div>
+                ) : (
+                    // For desktop: show full pagination
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={onPageChange}
+                        showIcons
+                    />
+                )}
+            </div>
         </>
     )
 };
