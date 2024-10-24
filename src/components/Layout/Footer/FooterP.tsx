@@ -1,5 +1,4 @@
 import { Footer } from "flowbite-react"
-import "../../../Style/style.css";
 
 const FooterP = () => {
     return (
