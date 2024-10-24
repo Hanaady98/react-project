@@ -125,7 +125,6 @@ const MyCards = () => {
                         )
                     })}
 
-
                     <div className="fixed flex p-5 bg-pink-300 rounded-full cursor-pointer dark:bg-white right-10 top-31 bottom-10">
                         <PiPlus size={30} onClick={navigateToCardCreation} />
                     </div>
