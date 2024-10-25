@@ -4,9 +4,9 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { Button, Card, Pagination } from "flowbite-react";
 import TitleSection from "../../components/Shared/TitleSection/TitleSection";
-import UsePagination from "../../Hooks/UsePagination";
 import { useSelector } from "react-redux";
 import { TRootState } from "../../Store/BigPie";
+import UsePaginationCrm from "../../Hooks/UsePaginationCrm";
 
 const Crm = () => {
 
@@ -40,7 +40,7 @@ const Crm = () => {
             item.name.last.includes(searchWord)
         );
     };
-    const { onPageChange, currentInUse, totalPages, currentPage } = UsePagination(searchUsers);
+    const { onPageChange, currentInUse, totalPages, currentPage } = UsePaginationCrm(searchUsers);
 
     const getAllUsers = async () => {
         try {
