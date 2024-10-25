@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { TUser } from "../../Types/TUser";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { Button, Card, Pagination } from "flowbite-react";
+import { Button, Card, Pagination, Spinner } from "flowbite-react";
 import TitleSection from "../../components/Shared/TitleSection/TitleSection";
 import { useSelector } from "react-redux";
 import { TRootState } from "../../Store/BigPie";
@@ -17,6 +17,8 @@ const Crm = () => {
     const [selectedUser, setSelectedUser] = useState<TUser | null>(null);
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+    const [loading, setLoading] = useState(true); //state for the loading spinner
 
     useEffect(() => {
         const handleResize = () => {
@@ -44,6 +46,7 @@ const Crm = () => {
 
     const getAllUsers = async () => {
         try {
+            setLoading(true); //start loading
             axios.defaults.headers.common['x-auth-token'] = localStorage.getItem("token");
             const response = await axios.get("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users");
             setUsers(response.data);
@@ -55,6 +58,8 @@ const Crm = () => {
                 timer: 2000,
                 showCloseButton: true
             });
+        } finally {
+            setLoading(false);
         };
     };
 
@@ -159,44 +164,49 @@ const Crm = () => {
             <div className="min-h-screen">
                 <TitleSection
                     title={"Client Relations/Content Management"}
-                    p={"here you can View/Edit/Delete users, please click a record to view full details"} />
+                    p={"Here you can View/Edit/Delete users, please click a record to view full details"} />
 
                 <main className="flex justify-center gap-3">
-
                     <div className="mt-20 overflow-x-auto text-center max-w-[90vw]">
-                        <table className="w-full table-auto">
-                            <thead className="bg-pink-200 dark:bg-gray-600">
-                                <tr>
-                                    <th className="px-4 py-2 text-gray-800 dark:text-white">Name</th>
-                                    <th className="px-4 py-2 text-gray-800 dark:text-white">Email</th>
-                                    <th className="px-4 py-2 text-gray-800 dark:text-white">Phone</th>
-                                    <th className="px-4 py-2 text-gray-800 dark:text-white">Authorization Level</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {currentInUse.map((item: TUser) => (
-                                    <tr
-                                        key={item._id}
-                                        className="divide-y cursor-pointer odd:bg-pink-300 even:bg-pink-400 odd:dark:bg-gray-800 even:dark:bg-gray-700 hover:bg-pink-500 dark:hover:bg-gray-600"
-                                        onClick={() => setSelectedUser(item)} >
-                                        <td className="px-4 py-2 text-gray-800 border dark:text-white">
-                                            {item.name.first + " " + item.name.middle + " " + item.name.last}
-                                        </td>
-                                        <td className="px-4 py-2 text-gray-800 border dark:text-white">{item.email}</td>
-                                        <td className="px-4 py-2 text-gray-800 border dark:text-white">{item.phone}</td>
-                                        <td className="px-4 py-2 text-gray-800 border dark:text-white">
-                                            {item.isAdmin ? "Admin" : item.isBusiness ? "Business" : "Personal"}
-                                        </td>
+
+                        {loading ? (
+                            <div className="flex flex-col items-center justify-center min-h-screen">
+                                <Spinner size="xl" className="mb-4" />
+                                <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">Loading...</p>
+                            </div>
+                        ) : (
+                            <table className="w-full table-auto">
+                                <thead className="bg-pink-200 dark:bg-gray-600">
+                                    <tr>
+                                        <th className="px-4 py-2 text-gray-800 dark:text-white">Name</th>
+                                        <th className="px-4 py-2 text-gray-800 dark:text-white">Email</th>
+                                        <th className="px-4 py-2 text-gray-800 dark:text-white">Phone</th>
+                                        <th className="px-4 py-2 text-gray-800 dark:text-white">Authorization Level</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {currentInUse.map((item: TUser) => (
+                                        <tr
+                                            key={item._id}
+                                            className="divide-y cursor-pointer odd:bg-pink-300 even:bg-pink-400 odd:dark:bg-gray-800 even:dark:bg-gray-700 hover:bg-pink-500 dark:hover:bg-gray-600"
+                                            onClick={() => setSelectedUser(item)} >
+                                            <td className="px-4 py-2 text-gray-800 border dark:text-white">
+                                                {item.name.first + " " + item.name.middle + " " + item.name.last}
+                                            </td>
+                                            <td className="px-4 py-2 text-gray-800 border dark:text-white">{item.email}</td>
+                                            <td className="px-4 py-2 text-gray-800 border dark:text-white">{item.phone}</td>
+                                            <td className="px-4 py-2 text-gray-800 border dark:text-white">
+                                                {item.isAdmin ? "Admin" : item.isBusiness ? "Business" : "Personal"}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        )}
                     </div>
-
-
                 </main>
-                <img src="/banner.webp" alt="banner pic with flowers" className="m-auto" />
 
+                <img src="/banner.webp" alt="banner pic with flowers" className="m-auto" />
 
                 {/*-------------------user details----------------*/}
                 {selectedUser && (
