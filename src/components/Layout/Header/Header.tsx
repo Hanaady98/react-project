@@ -63,8 +63,7 @@ const Header = () => {
         const token = localStorage.getItem("token");
         if (token) {
             (async () => {
-                axios.defaults.headers.common['x-auth-token'] =
-                    token;
+                axios.defaults.headers.common['x-auth-token'] = token;
                 const user = await axios.get("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/" +
                     (jwtDecode(token) as { _id: string })._id);
                 dispatch(userActions.login(user.data));

@@ -15,8 +15,6 @@ const RouteGuard = (props: TRouteGuard) => {
     const user = userState.user!;
 
     if (!userState.isLoggedIn) {
-        console.log(userState.isLoggedIn);
-
         return <Navigate to="/login" />
     };
 
