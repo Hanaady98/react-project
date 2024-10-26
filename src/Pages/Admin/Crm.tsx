@@ -193,7 +193,7 @@ const Crm = () => {
                                     {currentInUse.map((item: TUser) => (
                                         <tr
                                             key={item._id}
-                                            className="divide-y cursor-pointer odd:bg-pink-300 even:bg-pink-400 odd:dark:bg-gray-800 even:dark:bg-gray-700 hover:bg-pink-500 dark:hover:bg-gray-600"
+                                            className="border divide-y cursor-pointer odd:bg-pink-300 even:bg-pink-400 odd:dark:bg-gray-800 even:dark:bg-gray-700 hover:bg-pink-500 dark:hover:bg-gray-600"
                                             onClick={() => setSelectedUser(item)} >
                                             <td className="px-4 py-2 text-gray-800 border dark:text-white">
                                                 {item.name.first + " " + item.name.middle + " " + item.name.last}
