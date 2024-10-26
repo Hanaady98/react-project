@@ -34,14 +34,19 @@ const Crm = () => {
 
     const searchWord = useSelector((state: TRootState) => state.SearchSlice.search);
 
-    /* Filters the cards to include only those that match the search word. */
     const searchUsers = () => {
-        return users.filter((item: TUser) =>
-            item.name.first.includes(searchWord) ||
-            item.name.middle.includes(searchWord) ||
-            item.name.last.includes(searchWord)
-        );
+        const searchParts = searchWord.toLowerCase().split(" ");
+
+        return users.filter((item: TUser) => {
+            const fullName = `${item.name.first} ${item.name.middle} ${item.name.last}`.toLowerCase();
+
+            // Check if all parts of the searchWord are included in the fullName
+            return searchParts.every((part) => fullName.includes(part)) ||
+                item.phone.includes(searchWord) ||
+                item.email.includes(searchWord);
+        });
     };
+
     const { onPageChange, currentInUse, totalPages, currentPage } = UsePaginationCrm(searchUsers);
 
     const getAllUsers = async () => {
