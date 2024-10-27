@@ -15,8 +15,8 @@ const Header = () => {
     const dispatch = useDispatch();
     const nav = useNavigate();
 
-    const AdminProfile = () => {
-        if (isLoggedIn?.isAdmin) {
+    const profile = () => {
+        if (isLoggedIn?.isAdmin || isLoggedIn.isBusiness || isLoggedIn) {
             nav("/profile");
         } else {
             nav("/*");
@@ -165,13 +165,16 @@ const Header = () => {
                             </Navbar.Link>
                         )}
 
-                        {/*-------------------------admin's profile------------------------*/}
+                        {/*-------------------------profile------------------------*/}
 
-                        <Navbar.Brand onClick={AdminProfile}>
-                            <img src="/admin.jpg" alt="admin's profile rabbit icon"
-                                style={{ width: "40px", borderRadius: "50%", marginRight: "10px" }}
-                                className="cursor-pointer" />
-                        </Navbar.Brand>
+                        {(isLoggedIn && (isLoggedIn.isAdmin || isLoggedIn.isBusiness || !isLoggedIn.isAdmin && !isLoggedIn.isBusiness)) && (
+                            <Navbar.Brand onClick={profile}>
+                                <img src={isLoggedIn.image.url} // תמונת ברירת מחדל אם אין תמונה
+                                    style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+                                    className="cursor-pointer"
+                                />
+                            </Navbar.Brand>
+                        )}
 
                         {/*-------------------------CRM------------------------*/}
 
