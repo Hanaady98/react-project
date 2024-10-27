@@ -71,7 +71,7 @@ const Crm = () => {
     //patch request - to edit the auth level
     const editAuthLevel = async (user: TUser) => {
         try {
-            await Swal.fire({
+            const result = await Swal.fire({
                 title: "Are you sure you want to edit the auth level?",
                 icon: "warning",
                 showCancelButton: true,
@@ -80,30 +80,30 @@ const Crm = () => {
                 background: '#6d6d6d',
                 color: '#ffffff',
                 confirmButtonText: "Yes, i'm sure!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    console.log("confirmed");
-                }
             });
-            axios.defaults.headers.common['x-auth-token'] = localStorage.getItem("token");
-            const response = await axios.patch("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/" + user._id,
-                { isBusiness: !user.isBusiness });
 
-            if (response.status === 200) {
-                const usersIndex = users.indexOf(user);
-                const newUsersArray = [...users];
-                newUsersArray[usersIndex].isBusiness = !user.isBusiness;
-                setUsers(newUsersArray);
-                Swal.fire({
-                    title: "You changed the authorisation level successfully",
-                    icon: "success",
-                    timerProgressBar: true,
-                    timer: 2000,
-                    background: '#6d6d6d',
-                    color: '#ffffff',
-                    showConfirmButton: false,
-                    showCloseButton: true,
-                });
+            if (result.isConfirmed) {
+                axios.defaults.headers.common['x-auth-token'] = localStorage.getItem("token");
+                const response = await axios.patch("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/" + user._id,
+                    { isBusiness: !user.isBusiness });
+
+                if (response.status === 200) {
+                    const usersIndex = users.indexOf(user);
+                    const newUsersArray = [...users];
+                    newUsersArray[usersIndex].isBusiness = !user.isBusiness;
+                    setUsers(newUsersArray);
+
+                    Swal.fire({
+                        title: "You changed the authorisation level successfully",
+                        icon: "success",
+                        timerProgressBar: true,
+                        timer: 2000,
+                        background: '#6d6d6d',
+                        color: '#ffffff',
+                        showConfirmButton: false,
+                        showCloseButton: true,
+                    });
+                };
             };
         } catch (error) {
             Swal.fire({
