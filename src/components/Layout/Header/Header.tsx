@@ -169,7 +169,7 @@ const Header = () => {
 
                         {(isLoggedIn && (isLoggedIn.isAdmin || isLoggedIn.isBusiness || !isLoggedIn.isAdmin && !isLoggedIn.isBusiness)) && (
                             <Navbar.Brand onClick={profile}>
-                                <img src={isLoggedIn.image.url} // תמונת ברירת מחדל אם אין תמונה
+                                <img src={isLoggedIn.image.url} alt="profile pic"
                                     style={{ width: "30px", height: "30px", borderRadius: "50%" }}
                                     className="cursor-pointer"
                                 />
