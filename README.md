@@ -49,6 +49,10 @@ Edit user authorization levels (Business or Personal).
 Delete users.
 Search for users in the CRM.
 
+Login info for the Admin:
+name: admin@gmail.com
+password: Abc!123Abc 
+
 Usage
 Account Creation: Sign up for an account to start creating and managing cards.
 Creating Cards: Use the provided interface to create new cards. You can like or unlike cards as needed.
