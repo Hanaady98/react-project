@@ -81,3 +81,5 @@ Axios (for API requests)
 Redux (for state management)
 SweetAlert2 (for notifications)
 
+link for the project on render : 
+https://react-project-nxgg.onrender.com/
